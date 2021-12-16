@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="1500">
+  <title>Speaker Auto Off Fix 🔊</title>
+
+<style>
+
+  .textStyle {
+    text-align: center;
+    font-family: 'PT Mono', monospace;    
+  }
+  .myDiv {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-family: 'PT Mono', monospace;
+  }
+
+  .timeStyle {
+    text-align: center;
+    font-family: 'PT Mono', monospace;  
+    font-size: larger;
+  }
+  
+</style>
+</head>
+
+<body>
+  <div class="myDiv">
+    <h1>Speaker Auto Off Fix 🔊</h1>
+    <audio autoplay preload="auto" controls style="margin: 0 auto; display: block; padding: 20;">
+      <source src="krk_fix.wav" type="audio/wav">
+      Broweser does not support this audio
+    </audio>
+  </div>
+
+  <div class="timeStyle">
+    <h2 id="countdown"></h2>
+    <script>
+
+      function countdown( elementName, minutes, seconds )
+      {
+        var element, endTime, hours, mins, msLeft, time;
+
+        function twoDigits( n )
+        {
+            return (n <= 9 ? "0" + n : n);
+        }
+
+        function updateTimer()
+        {
+            msLeft = endTime - (+new Date);
+            if ( msLeft < 1000 ) {
+                location.reload();
+                element.innerHTML = "Time is up!";
+            } else {
+                time = new Date( msLeft );
+                hours = time.getUTCHours();
+                mins = time.getUTCMinutes();
+                element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+            }
+        }
+
+        element = document.getElementById( elementName );
+        endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+        updateTimer();
+      }
+
+      countdown("countdown", 25, 0 );
+    </script>
+  </div>
+
+  <div class="timeStyle textStyle">
+    <button class="textStyle" onClick="window.location.reload();">Reset Countdown</button>
+  </div>
+
+  <p class="textStyle">This will require you to enable the autoplay feature in your browser.</p>
+
+</body>
+</html>
